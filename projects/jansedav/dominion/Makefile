@@ -35,13 +35,21 @@ unittestresults:dominion.o
 	
 	rm -f unittestresults.out
 	./unittest1 >> unittestresults.out
+	gcov unittest1.c >> unittestresults.out
 	./unittest2 >> unittestresults.out
+	gcov unittest2.c >> unittestresults.out
 	./unittest3 >> unittestresults.out
+	gcov unittest3.c >> unittestresults.out
 	./unittest4 >> unittestresults.out
+	gcov unittest4.c >> unittestresults.out
 	./cardtest1 >> unittestresults.out
+	gcov cardtest1.c >> unittestresults.out
 	./cardtest2 >> unittestresults.out
+	gcov cardtest2.c >> unittestresults.out
 	./cardtest3 >> unittestresults.out
+	gcov cardtest3.c >> unittestresults.out
 	./cardtest4 >> unittestresults.out
+	gcov cardtest4.c >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
 runtests: testDrawCard 
