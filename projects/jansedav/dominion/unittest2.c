@@ -8,9 +8,9 @@
 void Pass_Fail(int check)
 {
 if(check == -1)
-printf("\nThis buy was not succesful\n\n");
+printf("\n This buy was not succesful\n\n");
 else
-printf("\nThis buy was a success!\n\n");
+printf("\n This buy was a success!\n\n");
 }
 
 
@@ -24,7 +24,7 @@ int cards[27] = {curse, estate, duchy, province, copper, silver, gold, adventure
 //Initialize the game
 initializeGame(2, cards, seed, &game);
 
-printf("\n\nUNIT TEST 2 BUYCARD--------------------------\n\n");
+printf("\n\nUNIT TEST 2 BUYCARD-------------------------------------------\n\n");
 
 //Checking to see if you can make a buy with 0n buys left.
 printf("Checking to see if buying with 0 buys left will fail:\n");
@@ -56,7 +56,7 @@ game.coins = 100;
 rand = buyCard(5,  &game);
 Pass_Fail(rand);
 
-printf("UNIT TEST 2 BUYCARD DONE-----------------------------\n");
+printf("UNIT TEST 2 BUYCARD DONE------------------------------------------\n");
 return 0;
 }
 

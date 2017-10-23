@@ -7,9 +7,9 @@
 void Pass_Fail(int check)
 {
 if(check == 1)
-printf("\nThe game HAS ended!\n\n");
+printf("\n The game HAS ended!\n\n");
 else
-printf("\nThe game has NOT ended!\n");
+printf("\n The game has NOT ended!\n");
 }
 
 

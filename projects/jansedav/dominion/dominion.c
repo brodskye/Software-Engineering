@@ -82,7 +82,6 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     {
       state->supplyCount[curse] = 30;
     }
-
   //set number of Victory cards
   if (numPlayers == 2)
     {
@@ -644,9 +643,9 @@ int getCost(int cardNumber)
 }
 
 //Function for the adventurer switch statement inside of cardEffect
-int adventurer_func(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int temphand[], int z)
+int adventurer_func(int *drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int temphand[], int z)
 {
-      while(drawntreasure<2){
+      while(*drawntreasure<2){
 	if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
 	  shuffle(currentPlayer, state);
 	}
@@ -654,8 +653,8 @@ int adventurer_func(int drawntreasure, struct gameState *state, int currentPlaye
 	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
 	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 	{
-	  drawntreasure++;
-	 drawntreasure++; //Here is the bug I introduced that makes it so drawntreasure increases by 1 too many.
+	  *drawntreasure = *drawntreasure + 1;
+	 *drawntreasure = *drawntreasure + 1; //Here is the bug I introduced that makes it so drawntreasure increases by 1 too many.
 	}
 	else{
 	  temphand[z]=cardDrawn;
@@ -780,7 +779,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     {
     case adventurer:
 	cardDrawn = 0;
-     return adventurer_func(drawntreasure, state, currentPlayer, cardDrawn, temphand, z);
+     return adventurer_func(&drawntreasure, state, currentPlayer, cardDrawn, temphand, z);
 
 			
     case council_room:

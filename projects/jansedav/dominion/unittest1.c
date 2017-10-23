@@ -14,13 +14,13 @@ int Pass_Fail(int pass, int i, int player)
 	//If the function returns 0 it was succesful
 	if(pass == 0)
 	{
-		printf("Test %d for player %d PASSED\n", i, player);	
+		printf(" Test %d for player %d PASSED\n", i, player);	
 		return 0;
 	}
 	//If the function returns -1 it failed
 	else if(pass == -1)
 	{
-		printf("Test %d for player %d FAILED\n", i, player);
+		printf(" Test %d for player %d FAILED\n", i, player);
 		return 1;
 	}
 return 0;	
@@ -39,7 +39,7 @@ int Shuffle_Unit()
 	//Initialize the game
 	initializeGame(2, cards, seed, &game);
 
-	printf("\n\nUNIT TEST 1 SHUFFLE------------------\n");
+	printf("\n\nUNIT TEST 1 SHUFFLE---------------------------------------------\n");
 
 	int i;
 
@@ -61,7 +61,7 @@ int Shuffle_Unit()
 
 	}
 	//Finished testing
-	printf("\nUNIT TEST 1 SHUFFLE DONE-------------\n");
+	printf("\nUNIT TEST 1 SHUFFLE DONE---------------------------------------------\n");
 return 0;
 }
 
