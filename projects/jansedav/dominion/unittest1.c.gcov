@@ -1,0 +1,77 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://Unit Test for the shuffle function of Dominion
+        -:    2:
+        -:    3:#include "dominion.h"
+        -:    4:#include "dominion_helpers.h"
+        -:    5:#include <string.h>
+        -:    6:#include <assert.h>
+        -:    7:#include "rngs.h"
+        -:    8:#include <stdlib.h>
+        -:    9:#include <stdio.h>
+        -:   10:
+        -:   11://Function that tells which players deck was shuffled and if the shuffling passed or failed.
+       10:   12:int Pass_Fail(int pass, int i, int player)
+        -:   13:{
+        -:   14:	//If the function returns 0 it was succesful
+       10:   15:	if(pass == 0)
+        -:   16:	{
+        3:   17:		printf(" Test %d for player %d PASSED\n", i, player);	
+        3:   18:		return 0;
+        -:   19:	}
+        -:   20:	//If the function returns -1 it failed
+        7:   21:	else if(pass == -1)
+        -:   22:	{
+        7:   23:		printf(" Test %d for player %d FAILED\n", i, player);
+        7:   24:		return 1;
+        -:   25:	}
+    #####:   26:return 0;	
+        -:   27:}
+        -:   28:
+        -:   29://Function to test if the shuffle function in dominion actually works.
+        1:   30:int Shuffle_Unit()
+        -:   31:{
+        -:   32:	//Seed I randomly chise
+        1:   33:	int seed = 100;
+        -:   34:	struct gameState game;
+        -:   35:
+        -:   36://list of cards I need to test the shuffle function.
+        1:   37:	int cards[27] = {curse, estate, duchy, province, copper, silver, gold, adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map};
+        -:   38:
+        -:   39:	//Initialize the game
+        1:   40:	initializeGame(2, cards, seed, &game);
+        -:   41:
+        1:   42:	printf("\n\nUNIT TEST 1 SHUFFLE---------------------------------------------\n");
+        -:   43:
+        -:   44:	int i;
+        -:   45:
+        -:   46:	//Run the tests 5 times to see if they are working.
+        6:   47:	for(i = 1; i <= 5; i++)
+        -:   48:	{
+        -:   49:		//Checking to see if the shuffle works for player 1
+        5:   50:		printf("Shuffle for turn number %d\n",i);
+        5:   51:		int Pass1 = shuffle(1, &game);
+        5:   52:		Pass_Fail(Pass1, i, 1);
+        -:   53:		//Ending player 1's turn
+        5:   54:		endTurn(&game);
+        -:   55:	
+        -:   56:		//Checking to see if the shuffle works for player 2
+        5:   57:		int Pass2 = shuffle(2, &game);
+        5:   58:		Pass_Fail(Pass2, i, 2);
+        -:   59:		//Ending player 2's turn
+        5:   60:		endTurn(&game);
+        -:   61:
+        -:   62:	}
+        -:   63:	//Finished testing
+        1:   64:	printf("\nUNIT TEST 1 SHUFFLE DONE---------------------------------------------\n");
+        1:   65:return 0;
+        -:   66:}
+        -:   67:
+        1:   68:int main()
+        -:   69:{
+        1:   70:Shuffle_Unit();
+        1:   71:return 0;
+        -:   72:}

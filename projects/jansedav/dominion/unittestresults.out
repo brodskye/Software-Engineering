@@ -1,0 +1,206 @@
+
+
+UNIT TEST 1 SHUFFLE---------------------------------------------
+Shuffle for turn number 1
+ Test 1 for player 1 PASSED
+ Test 1 for player 2 FAILED
+Shuffle for turn number 2
+ Test 2 for player 1 PASSED
+ Test 2 for player 2 FAILED
+Shuffle for turn number 3
+ Test 3 for player 1 FAILED
+ Test 3 for player 2 FAILED
+Shuffle for turn number 4
+ Test 4 for player 1 PASSED
+ Test 4 for player 2 FAILED
+Shuffle for turn number 5
+ Test 5 for player 1 FAILED
+ Test 5 for player 2 FAILED
+
+UNIT TEST 1 SHUFFLE DONE---------------------------------------------
+File 'unittest1.c'
+Lines executed:96.15% of 26
+Creating 'unittest1.c.gcov'
+
+
+
+UNIT TEST 2 BUYCARD-------------------------------------------
+
+Checking to see if buying with 0 buys left will fail:
+
+ This buy was not succesful
+
+Checking to see if buying a card that doesn't exist will fail: 
+
+ This buy was not succesful
+
+Checking to see if buying a card that you don't have enough money for will fail:
+
+ This buy was not succesful
+
+Checking to see if you have enough coins and buys if the buy is succesful:
+
+ This buy was a success!
+
+UNIT TEST 2 BUYCARD DONE------------------------------------------
+File 'unittest2.c'
+Lines executed:100.00% of 34
+Creating 'unittest2.c.gcov'
+
+
+
+ UNIT TEST 3 ENDTURN-----------------------------------------------------
+
+Checking to see if it is Player 1's turn and ending the turn:
+ The current player that is up for their turn is: 1
+
+ SUCCESS
+Checking to see if it is Player 2's turn and ending the turn:
+ The current player that is up for their turn is: 2
+
+ SUCCESS
+Checking to see if it is Player 1's turn and ending the turn:
+ The current player that is up for their turn is: 1
+
+ SUCCESS
+Checking to see if it is Player 2's turn and ending the turn:
+ The current player that is up for their turn is: 2
+
+ SUCCESS
+UNIT TEST 3 ENDTURN DONE---------------------------------------------------------
+File 'unittest3.c'
+Lines executed:92.59% of 27
+Creating 'unittest3.c.gcov'
+
+
+
+UNIT TEST 4 GAMEOVER---------------------
+
+Checking to see if the game will end when the supply count of province is at 0:
+
+ The game HAS ended!
+
+Checking to see if the game will end when the supply count of 3 supply piles are at 0:
+
+ The game HAS ended!
+
+Checking to see if the game will not end when neither the province count is at 0 and there are not 3 supply with 0 count: 
+
+ The game has NOT ended!
+
+
+UNIT TEST 4 GAMEOVER DONE-----------------
+
+File 'unittest4.c'
+Lines executed:100.00% of 32
+Creating 'unittest4.c.gcov'
+
+
+
+CARD TEST 1 ADVENTURER--------------------------------------------------------------
+
+
+Checking current hand count to see if it will increase by 1 and the treasure count by 1 once the adventure card is played:
+
+ Current hand count 0
+ Current treasure count 0
+
+Checking to see if the adventurer card runs succesfully:
+
+ TEST WAS SUCCESFUL!
+
+Checking to see if current hand count has increased by 1 as well as treasure:
+
+ Current hand count 1
+ Current treasure count 2
+ FAIL TREASURE COUNT IS TOO HIGH!
+
+
+CARD TEST 1 ADVENTURER---------------------------------------------------------------
+File 'cardtest1.c'
+Lines executed:93.55% of 31
+Creating 'cardtest1.c.gcov'
+
+
+
+CARD TEST 2 SMITHY-----------------------------------------------
+
+
+Checking to see how many cards are in the hand initially
+Number of cards in players hand: 0
+
+Checking to see if the smithy card will run succesfully:
+Test PASSED succesfuly!
+
+Checking to see if the amount of cards has increased by 2 (Should only increase by 2 because of the smithy card being discarded)
+Number of cards in players hand: 3
+TEST FAILED
+
+CARD TEST 2 SMITHY END-------------------------------------------
+
+File 'cardtest2.c'
+Lines executed:100.00% of 25
+Creating 'cardtest2.c.gcov'
+
+
+
+CARD TEST 3 VILLAGE-------------------------------
+
+
+Check to see how many actions and cards the player has initially
+
+ Player actions:1
+
+ Player cards:0
+
+Check to see if the Village function runs succesfully
+ Test PASSED succesfuly!
+
+Check to see how many actions and cards the player has after function call (player cards should not increase/decrease because the Village card will get discarded, number of actions should increase by 2 :
+
+ Player actions:3
+ Test PASSED succesfuly!
+
+ Player cards:-1
+ TEST FAILED
+
+
+CARD TEST 3 VILLAGE END------------------------------
+
+File 'cardtest3.c'
+Lines executed:93.75% of 32
+Creating 'cardtest3.c.gcov'
+
+
+
+CARD TEST 3 GREAT HALL-------------------------------
+
+
+Check to see how many actions and cards the player has initially
+
+ Player actions:1
+
+ Player cards:0
+
+Check to see if the Great Hall function runs succesfully
+ Test PASSED succesfuly!
+
+Check to see how many actions and cards the player has after function call (player cards should not increase/decrease because the great hall card will get discarded, number of actions should increase by 1 :
+
+ Player actions:2
+ Test PASSED succesfuly!
+
+ Player cards:1
+ TEST FAILED
+
+
+CARD TEST 3 GREAT HALL END------------------------------
+
+File 'cardtest4.c'
+Lines executed:93.75% of 32
+Creating 'cardtest4.c.gcov'
+
+File 'dominion.c'
+Lines executed:34.70% of 559
+Creating 'dominion.c.gcov'
+

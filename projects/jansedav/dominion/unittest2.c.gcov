@@ -1,0 +1,75 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://Unit Test for Buy Card
+        -:    2:
+        -:    3:
+        -:    4:#include "dominion.h"
+        -:    5:#include <stdio.h>
+        -:    6:
+        -:    7://Function that tells me if a test was succesful or not.
+        4:    8:void Pass_Fail(int check)
+        -:    9:{
+        4:   10:if(check == -1)
+        3:   11:printf("\n This buy was not succesful\n\n");
+        -:   12:else
+        1:   13:printf("\n This buy was a success!\n\n");
+        4:   14:}
+        -:   15:
+        -:   16:
+        1:   17:int Buy_Card()
+        -:   18:{
+        -:   19:struct gameState game;
+        -:   20://Random seed
+        1:   21:int seed = 100;
+        -:   22://The cards in the deck that I need for initialization
+        1:   23:int cards[27] = {curse, estate, duchy, province, copper, silver, gold, adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall, minion, steward, tribute, ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map};
+        -:   24://Initialize the game
+        1:   25:initializeGame(2, cards, seed, &game);
+        -:   26:
+        1:   27:printf("\n\nUNIT TEST 2 BUYCARD-------------------------------------------\n\n");
+        -:   28:
+        -:   29://Checking to see if you can make a buy with 0n buys left.
+        1:   30:printf("Checking to see if buying with 0 buys left will fail:\n");
+        -:   31:
+        1:   32:game.numBuys = 0;
+        1:   33:game.coins = 100;
+        1:   34:int rand = buyCard(1, &game);
+        1:   35:Pass_Fail(rand);
+        -:   36:
+        -:   37://Checking to see if you can make a buy for a card that does not exist.
+        1:   38:printf("Checking to see if buying a card that doesn't exist will fail: \n");
+        -:   39:
+        1:   40:game.numBuys = 1;
+        1:   41:rand = buyCard(100, &game);
+        1:   42:Pass_Fail(rand);
+        -:   43:
+        -:   44:
+        -:   45://Checking to see if you can make a buy if you dont have enough money for a card.
+        1:   46:printf("Checking to see if buying a card that you don't have enough money for will fail:\n");
+        1:   47:game.numBuys = 1;
+        1:   48:game.coins = 0;
+        1:   49:rand = buyCard(5, &game);
+        1:   50:Pass_Fail(rand);
+        -:   51:
+        -:   52://Checking to see if you have enough coins and buys if the buy will end up being succesful.
+        1:   53:printf("Checking to see if you have enough coins and buys if the buy is succesful:\n");
+        1:   54:game.numBuys = 1;
+        1:   55:game.coins = 100;
+        1:   56:rand = buyCard(5,  &game);
+        1:   57:Pass_Fail(rand);
+        -:   58:
+        1:   59:printf("UNIT TEST 2 BUYCARD DONE------------------------------------------\n");
+        1:   60:return 0;
+        -:   61:}
+        -:   62:
+        1:   63:int main()
+        -:   64:{
+        -:   65:
+        1:   66:Buy_Card();
+        -:   67:
+        1:   68:return 0;
+        -:   69:
+        -:   70:}
