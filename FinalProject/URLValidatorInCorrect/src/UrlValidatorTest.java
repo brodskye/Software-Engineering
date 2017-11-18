@@ -94,7 +94,7 @@ public class UrlValidatorTest extends TestCase {
 	        	
 			//loop through partitions
 	        for(int j = 0; j < 5; j++){
-	            String test_url = testProtocolPartition(table_scheme[i][0], j) + testProtocolPartition(table_scheme[i][1], j) 
+	            String test_url = testProtocolPartition(table_scheme[i][0], j) + testAuthorityPartition(table_scheme[i][1], j) 
 	                + testProtocolPartition(table_scheme[i][2], j) + testProtocolPartition(table_scheme[i][3], j);
 	            
 	            //get expected boolean for this URL
@@ -128,9 +128,24 @@ public class UrlValidatorTest extends TestCase {
 	
 	}
    
-   public void testYourFirstPartition()
+//Partition function to test invalid and vaild authoritys with the URLValidator() function provided by Apache Commons. 
+   public static string testAuthorityPartition(boolean isValid, int index()
    {
+	   //Valid authority String array of size 6
+	   String[] valid = {"www.facebook.com", "amazon.com", "255.255.255.255", "facebook.cc", "facebook.au", "1.1.1.1"}; 
 	   
+	   //Invalid authority String array of size 6
+	   String[] invalid = {"www.website.invalid", "amazon.123", "300.300.300.300", "1.1.1.1.1", "abcdefghijklmnop", ""};
+
+	   //Returning string at current index of the valid or invalid authority to main function.
+	   if(isValid)
+	  	{
+			return valid[index];
+		}
+	   else
+   		{
+			return invalid[index];
+   		}
    }
    
    public void testYourSecondPartition(){
