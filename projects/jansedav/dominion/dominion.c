@@ -690,8 +690,8 @@ int smithy_func(int currentPlayer, struct gameState *state, int handPos)
 int village_func(int currentPlayer, struct gameState *state, int handPos)
 {
       //+1 Card
-	  //commented out the drawCard call in order to introduce a bug.
-    //  drawCard(currentPlayer, state);
+	
+    drawCard(currentPlayer, state);
 			
       //+2 Actions
       state->numActions = state->numActions + 2;
