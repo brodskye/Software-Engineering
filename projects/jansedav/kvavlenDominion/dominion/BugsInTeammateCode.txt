@@ -1,0 +1,20 @@
+Bug #1:
+Title: Adventurer Card Bug
+File: Dominion.c
+Which Function: adventurer_effect
+Line #: 658
+Classification: Serious Bug
+Platform: Unix, vim
+Reproduced: Can be reproduced occasionally
+Bug Description: This Bug was found when using my randomtestadventurer.c unit test.  When running my test I noticed the treasure count was very often wrong after the card had been used.  Because of this I check where the treasure was being increased and noticed a comparison “==” had been changed to a “=” for the if statement that checks to see if the most recently card drawn is a treasure card.  The incorrect code was: if (cardDrawn = copper || cardDrawn == silver || cardDrawn == gold), the correct code should be: if(carDrawn == copper || cardDrawn == silver || cardDrawn == gold).
+
+Bug #2:
+Title: Smithy Card Bug
+File: Dominion.c
+Which Function: smithy_effect
+Line #: 803
+Classification: Serious Bug
+Platform: Unix, vim
+Reproduced: Can be reproduced every time
+Bug Description: This bug was found within my cardtest2.c unit test where the smithy function was being tested.  In my test I noticed that one too many cards had been drawn, only 2 cards should be drawn yet 3 were being drawn.  I went to the section of the code where cards are drawn in the smithy function and noticed a “<” had been changed to “<=”.  The incorrect code is: for (i=0; i<=3; i++), the correct code should be: for(i=0; i<3; i++), the bug caused the for loop to run to many times hence the extra drawn card. 
+
