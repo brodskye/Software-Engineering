@@ -158,7 +158,7 @@ public class UrlValidatorTest extends TestCase {
 		String[] valid = { "http://", "https://", "ftp://", "cid://", "mailto:", "" };
 
 		// array for invalid protocols
-		String[] invalid = { "345://", "http:/", "https:", "https/", ":::", "-&@" };
+		String[] invalid = { "h/t:", "http:/", "https:", "https/", ":::", "-&@" };
 
 		if (isValid) {
 			return valid[index];
