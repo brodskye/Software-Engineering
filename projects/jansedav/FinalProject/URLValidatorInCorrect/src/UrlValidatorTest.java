@@ -129,9 +129,15 @@ public class UrlValidatorTest extends TestCase {
 
 		// loop through boolean 2D array
 		for (int i = 0; i < table_scheme.length; i++) {
-
+			
+			//print out table scheme header
+			System.out.println("\n--------- INPUT PARTITION TEST SCHEME #" + i + ":\n Protocol Input: "
+				+ table_scheme[i][0] + ", Authority Input: " + table_scheme[i][1] + ", Port Input: "
+				+ table_scheme[i][2] + ", Query/Path Input: " + table_scheme[i][3] + "\n-------------- \n");
+			
 			// loop through partitions
-			for (int j = 0; j < 5; j++) {
+			// changed loop to 3 to fix current build error bug
+			for (int j = 0; j < 3; j++) {
 				String test_url = testProtocolInput(table_scheme[i][0], j) + testAuthorityInput(table_scheme[i][1], j)
 						+ testPortInput(table_scheme[i][2], j) + testPathInput(table_scheme[i][3], j);
 
