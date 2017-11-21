@@ -44,17 +44,17 @@ public class UrlValidatorTest extends TestCase {
 
 		// manual test protocol
 		System.out.println("URL: \"https://www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com"));
+		System.out.println("Expected: true, Actual: " + urlVal.isValid("https://www.amazon.com"));
 		System.out.println("\nURL: \"ftp://www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("ftp://www.amazon.com"));
+		System.out.println("Expected: true, Actual: " + urlVal.isValid("ftp://www.amazon.com"));
 		System.out.println("\nURL: \":www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid(":www.amazon.com"));
+		System.out.println("Expected: false, Actual: " + urlVal.isValid(":www.amazon.com"));
 		System.out.println("\nURL: \"100e://www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("100e://www.amazon.com"));
+		System.out.println("Expected: false, Actual: " + urlVal.isValid("100e://www.amazon.com"));
 		System.out.println("\nURL: \"asdf://www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("asdf://www.amazon.com"));
+		System.out.println("Expected: true, Actual: " + urlVal.isValid("asdf://www.amazon.com"));
 		System.out.println("\nURL: \"www.amazon.com\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("www.amazon.com"));
+		System.out.println("Expected: false, Actual: " + urlVal.isValid("www.amazon.com"));
 
 		System.out.println("\nURL: \"http://wwk.amazon.com\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://wwk.amazon.com/"));
