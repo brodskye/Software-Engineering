@@ -407,6 +407,11 @@ public class UrlValidatorTest extends TestCase {
 			}
 		}
 		
+		// Test localhost domain, which does not follow format above	
+		String local_url = "http://localhost"; 
+		System.out.println(local_url);
+		System.out.println("Expected: true, Actual: " + url_validator.isValid(local_url)); 
+	
 		// TEST INVALID URLS
 		for (int i = 0; i < invalid_subdomain_ct; i++) {
 			for (int j = 0; j < invalid_domain_ct; j++) {
