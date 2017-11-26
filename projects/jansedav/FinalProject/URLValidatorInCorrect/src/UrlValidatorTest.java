@@ -1,4 +1,3 @@
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -40,9 +39,9 @@ public class UrlValidatorTest extends TestCase {
 
 		System.out.println("------------------------- MANUALLY TESTING URLS -----------------------\n");
 
-		System.out.println("TEST 1: PROTOCOLS");
+		System.out.println("TEST 1: PROTOCOL");
 
-		// manual test protocol
+		// manual test: protocol
 		System.out.println("URL: \"https://www.amazon.com\"");
 		System.out.println("Expected: true, Actual: " + urlVal.isValid("https://www.amazon.com"));
 		System.out.println("\nURL: \"ftp://www.amazon.com\"");
@@ -56,58 +55,41 @@ public class UrlValidatorTest extends TestCase {
 		System.out.println("\nURL: \"www.amazon.com\"");
 		System.out.println("Expected: false, Actual: " + urlVal.isValid("www.amazon.com"));
 
-		System.out.println("\nURL: \"http://wwk.amazon.com\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://wwk.amazon.com/"));
+		System.out.println("\nTEST 2: AUTHORITY");
 
-		System.out.println("\nURL: \"http://8ww.amazon.com\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://8ww.amazon.com"));
-
-		System.out.println("\nURL: \"http://w&w.amazon.com\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://w&w.amazon.com"));
-
+		// manual test: authority 
+		System.out.println("\nURL: \"http://www.google.com\"");
+		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.google.com/"));
+		System.out.println("\nURL: \"http://www.thisisaurl.com\""); 
+		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.thisisaurl.com/")); 
 		System.out.println("\nURL: \"http://.amazon.com\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://.amazon.com"));
-
 		System.out.println("\nURL: \"\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid(""));
-
-		System.out.println("\nURL: \"http://www.asdf&8.com\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.asdf&8.com"));
-
 		System.out.println("\nURL: \"http://256.295.153.25\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://256.295.153.25"));
-
 		System.out.println("\nURL: \"http://www..com\"");
-		System.out.println("Expected: False, Actual: " + "http://www..com");
+		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www..com"));
 
-		System.out.println("\nURL: \"http://www.asdf\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.asdf"));
-
-		System.out.println("\nURL: \"http://www.amazon.com5\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.com5"));
-
-		System.out.println("\nURL: \"http://www.amazon.i\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.i"));
-
-		System.out.println("\nURL: \"http://www.amazon.i\"");
-		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.555"));
-
+		System.out.println("\nTEST 3: PATH/QUERY"); 
+ 
+		// manual test: path/query  
 		System.out.println("\nURL:\"https://www.amazon.com/b?&node=17285120011&=value\"");
-		System.out.println(
-				"Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/b?&node=17285120011&=value"));
-
-		System.out.println("\nURL: \"https://www.amazon.com/156\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/156"));
-
-		System.out.println("\nURL: \"https://www.google.com/1%5E&\"");
-		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.google.com/1%5E&"));
-
-		System.out.println("\nURL: \"http://www.amazon.com/]\"");
+		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/b?&node=17285120011&=value"));
+		System.out.println("\nURL: \"https://www.amazon.com/path\"");
+		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/path"));
+		System.out.println("\nURL: \"https://www.google.com/\"\"\"");
+		System.out.println("Expected: False, Actual: " + urlVal.isValid("https://www.google.com/\"\""));
+		System.out.println("\nURL: \"http://www.amazon.com/<<>>\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.com/]"));
 
+		System.out.println("\nTEST 4: PORT");
+
+		// manual test: port 
+		System.out.println("\nURL: \"http://www.amazon.com:8080\""); 
+		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.amazon.com:8080"));
 		System.out.println("\nURL: \"http://www.amazon.com:80\"");
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.amazon.com:80"));
-
 		System.out.println("\nURL: \"http://www.amazon.com:k\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.com:k"));
 	}
@@ -197,10 +179,8 @@ public class UrlValidatorTest extends TestCase {
 	public static String testPortInput(boolean isValid, int index) {
 
 		// Arrays of valid and invalid ports
-		// Reference:
-		// https://stackoverflow.com/questions/113224/what-is-the-largest-tcp-ip-network-port-number-allowable-for-ipv4
-		String[] valid = { ":8080", ":65535", ":1", ":65536", "" };
-		String[] invalid = { ":", ":10000", ":x", };
+		String[] valid = { ":8080", ":65535", ":1", ":0", ":80", ":345"};
+		String[] invalid = { ":notaport", ":10000000000", ":x", ":65536", "", ":#"};
 
 		// Return valid or invalid port string at location within array specified,
 		// depending on arguments
@@ -213,11 +193,9 @@ public class UrlValidatorTest extends TestCase {
 	}
 
 	public static String testPathInput(boolean isValid, int index) {
-		// Reference:
-		// https://stackoverflow.com/questions/4669692/valid-characters-for-directory-part-of-a-url-for-short-links
 		// Arrays for valid and invalid paths/queries
-		String[] valid = { "/", "", "/a" };
-		String[] invalid = { "?", "///", "#" };
+		String[] valid = { "/", "/a", "/?", "/path?query", "/page8887", ""};
+		String[] invalid = { "/", "/<", "/>", "\"", "/ /", "/%"};
 
 		// Return valid or invalid path string at location within array specified,
 		// depending on arguments
@@ -228,20 +206,21 @@ public class UrlValidatorTest extends TestCase {
 		}
 	}
 
-	public void testYourSecondPartition() {
+	// public void testYourSecondPartition() {
 
-	}
+	//}
 
-	public void testIsValid() {
-		for (int i = 0; i < 10000; i++) {
+	//public void testIsValid() {
+	//	for (int i = 0; i < 10000; i++) {
 
-		}
-	}
+	//	}
+	//}
 
 	public void testAnyOtherUnitTest() {
 		inetAddressUnitTest();
 		URLValPortUnitTest();
 		URLValQueryUnitTest();
+		domainValidatorUnitTest(); 
 	}
 
 	/**
@@ -372,6 +351,71 @@ public class UrlValidatorTest extends TestCase {
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
 			System.out.println("Expected:true, Actual: " + Is_Val);
+		}
+	}
+
+	/**
+ 	 * Creates arrays for valid and invalid: subdomains (i.e. www), domains (i.e. example), and tlds (i.e. com)
+ 	 * and tests combinations of all valid parts of a domain name, and all invalid parts of a domain name.  
+ 	 * 
+ 	 */ 	
+	public void domainValidatorUnitTest() {
+		// Create valid sub-domains (i.e. the 'www' in www.example.com)
+		String[] valid_subdomain = { "www", "abc", "en", "123", "as23", "w-w", "a-", "thisisavalidsubdomain", "q", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasd" };
+		int valid_subdomain_ct = 10; 
+				
+		// Create invalid sub-domains 
+		String[] invalid_subdomain = { "-w-", "#", "?", "12&", ")", ">", "*", " ", "", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasde" };
+		int invalid_subdomain_ct = 10; 
+				
+		// Create valid domain -- without TLD (i.e. example in example.com)
+		String[] valid_domain = { "google", "amazon", "thinkgeek", "asdfjkl", "123", "abc", "91a", "", "a", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasd" };
+		int valid_domain_ct = 10; 
+				
+		// Create invalid domain -- without TLD
+		String[] invalid_domain = { "w-+", "#",	"?", "12&", ")", ">", "*", " ",	"", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasde" };
+		int invalid_domain_ct = 10; 
+			
+		// Create valid TLDs - not a comprehensive list, but includes all Country Codes and all original TLDs
+		String[] valid_tlds = { "com", "org", "net", "int", "edu", "gov", "mil", 
+				"ac", "ad", "ae", "af", "ag", "ai", "al", "am", "an", "ao", "aq", "ar", "as", "at", "au", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi",			
+				"bj", "bl", "bn", "bo", "bq", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cx", 		
+				"cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "eh", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", 
+				"gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy", "hk", "hm", "hn", "hr", "ht", "hu", "id", "ie", "il", "im", "in", "io", "iq", "ir", "is", "it", "je", 
+				"jm", "jo", "jp", "ke", "kg", "kh", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", 
+				"mf", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", 
+				"nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", 
+				"sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "ss", "st", "su", "sv", "sx", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", 
+				"tt", "tv", "tw", "tz", "ua", "ug", "uk", "um", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw" };							 	
+		int valid_tlds_ct = 261; 
+			
+		// Create invalid TLDs 
+		String[] invalid_tlds = { "aa", "ab", "le", "ld", "lo", "ll", "lm", "ln", "lp", "lq" };	// Invalid Country Codes
+		int invalid_tlds_ct = 10; 
+		
+		// Make a new instance of UrlValidator class
+		UrlValidator url_validator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+		
+		// TEST VALID URLS
+		for (int i = 0; i < valid_subdomain_ct; i++) {
+			for (int j = 0; j < valid_domain_ct; j++) {
+				for (int k = 0; k < valid_tlds_ct; k++) {
+					String test_url = "http://" + valid_subdomain[i] + "." + valid_domain[j] + "." + valid_tlds[k]; 
+					System.out.println(test_url);
+					System.out.println("Expected: true, Actual: " + url_validator.isValid(test_url)); 
+				}
+			}
+		}
+		
+		// TEST INVALID URLS
+		for (int i = 0; i < invalid_subdomain_ct; i++) {
+			for (int j = 0; j < invalid_domain_ct; j++) {
+				for (int k = 0; k < invalid_tlds_ct; k++) {
+					String test_url = "http://" + invalid_subdomain[i] + "." + invalid_domain[j] + "." + invalid_tlds[k]; 
+					System.out.println(test_url);
+					System.out.println("Expected: false, Actual: " + url_validator.isValid(test_url)); 
+				}
+			}
 		}
 	}
 }
