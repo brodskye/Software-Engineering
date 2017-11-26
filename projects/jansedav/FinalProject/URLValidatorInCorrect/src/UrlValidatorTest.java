@@ -240,6 +240,8 @@ public class UrlValidatorTest extends TestCase {
 
 	public void testAnyOtherUnitTest() {
 		inetAddressUnitTest();
+		URLValPortUnitTest();
+		URLValQueryUnitTest();
 	}
 
 	/**
@@ -303,5 +305,73 @@ public class UrlValidatorTest extends TestCase {
 
 		}
 
+	}
+	
+	//Unit test for Port Values, uses the URLValidator and the isValid() function to test each port.
+	//Valid # Range: 1-65535
+	//Invalid # Range: > 65535
+	public void URLValPortUnitTest()
+	{
+		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+		//int used to increment port value
+		int i;
+		//boolean value used to check if URL is valid
+		boolean Is_Val;
+		//Valid url used to add port to
+		String ValURL = "https://amazon.com:";
+		String URLProt;
+		
+		//First loop runs in increments of 128 so we don't have to run 65536 different ports.
+		System.out.println("\n\n--------- UNIT TEST FOR PORT IN URLVALIDATOR ---------\n");
+		System.out.println("--------- Test 1: Valid Port range 0-65535 using increments of 128 ---------\n");
+		for(i = 0; i <= 65536; i += 128)
+		{
+			URLProt = ValURL + i;
+			//Holds valid URL + port number
+			Is_Val = urlVal.isValid(URLProt);
+			System.out.println(URLProt);
+			System.out.println("Expected: true, Actual: " + Is_Val);
+		}
+		
+		//Second loop runs for around 300 invalid port numbers to check and see if the UrlValidator is correctly checking invalid ports.
+		System.out.println("\n\n--------- Test 2: Invalid Port range 65535-65800 using increments of 1 ---------\n");
+		
+		for(i = 65536; i <= 65800; i++)
+		{
+			URLProt = ValURL + i;
+			//Holds valid URL + port number
+			Is_Val = urlVal.isValid(URLProt);
+			System.out.println(URLProt);
+			System.out.println("Expected: false, Actual: " + Is_Val);
+		}
+		
+	}
+	
+	//Tests an array of 11 valid Querys to see if they return valid or invalid
+	//I have no idea if there is such thing as an invalid query from what I have read online it seems every ASCII character is valid.
+	public void URLValQueryUnitTest()
+	{
+		//UrlValidator Object
+		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+		Boolean Is_Val;
+		//Valid URL used to test Querys
+		String ValURL = "https://facebook.com";
+		//Array of Querys to be tested
+		String[] Querys = {"?action=view", "?action=edit&mode=up", "?act=hsdsdfhsd", "?====..a.dfsdsd``11~~~", "?~~``==IsThere", "?)(__+_SuchThing", "?@#$##AsAn", "?***&&&InvalidQuery??", "?::::12345::::IDont", "??????????know", ""};
+		int i;
+		//Holds the final URL with the Query added to the end.
+		String URLQuery;
+		System.out.println("\n\n--------- UNIT TEST FOR QUERY IN URLVALIDATOR ---------\n");
+		System.out.println("--------- Test: Testing 10 Different Querys ---------\n");
+		//Test all 11 Querys
+		for(i=0; i <=10; i++)
+		{
+			//Combine Valid URL with each Query.
+			URLQuery = ValURL + Querys[i];
+			Is_Val = urlVal.isValid(URLQuery);
+			System.out.println(URLQuery);
+			//Compare the expected result to the actual result from isValid()
+			System.out.println("Expected:true, Actual: " + Is_Val);
+		}
 	}
 }
