@@ -235,8 +235,8 @@ public class UrlValidatorTest extends TestCase {
 	// invalid: all segments above 255 should return false
 	public void inetAddressUnitTest() {
 
-		// init new InetAddressValidator object
-		InetAddressValidator inetValidator = new InetAddressValidator();
+		// init new UrlValidator object
+		UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
 		// intialize inet address segments to 0
 		int[] addressSegments = { 0, 0, 0, 0 };
@@ -256,10 +256,10 @@ public class UrlValidatorTest extends TestCase {
 				addressSegments[i]++; // increment segment
 
 				// create inet address string
-				inetAddress = addressSegments[0] + "." + addressSegments[1] + "." + addressSegments[2] + "."
+				inetAddress = "http://" + addressSegments[0] + "." + addressSegments[1] + "." + addressSegments[2] + "."
 						+ addressSegments[3];
 
-				isValidSegment = inetValidator.isValid(inetAddress);
+				isValidSegment = urlValidator.isValid(inetAddress);
 				System.out.println(inetAddress);
 				System.out.println("Expected: true, Actual: " + isValidSegment);
 			}
@@ -274,10 +274,10 @@ public class UrlValidatorTest extends TestCase {
 			for (j = 255; j < 300; j++) {
 
 				addressSegments[i]++;
-				inetAddress = addressSegments[0] + "." + addressSegments[1] + "." + addressSegments[2] + "."
+				inetAddress = "http://" + addressSegments[0] + "." + addressSegments[1] + "." + addressSegments[2] + "."
 						+ addressSegments[3];
 
-				isValidSegment = inetValidator.isValid(inetAddress);
+				isValidSegment = urlValidator.isValid(inetAddress);
 				System.out.println(inetAddress);
 				System.out.println("Expected: false, Actual: " + isValidSegment);
 			}
