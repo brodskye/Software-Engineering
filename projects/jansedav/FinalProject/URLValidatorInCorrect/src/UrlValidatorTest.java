@@ -323,10 +323,18 @@ public class UrlValidatorTest extends TestCase {
 			System.out.println(URLProt);
 			System.out.println("Expected: false, Actual: " + Is_Val);
 		}
-		
+		//Third Loop runs for the range in which the error is ocurring so I can check where the error is happening
+		System.out.println("\n\n--------- Test 3: Checking the port range of 880-1024 where and error is occurring ---------");
+		for(i = 880; i <= 1024; i++)
+		{
+			URLProt = ValURL + i;
+			//Holds valid URL + port number
+			Is_Val = urlVal.isValid(URLProt);
+			System.out.println(URLProt);
+			System.out.println("Expected: false, Actual: " + Is_Val);
+		}
 	}
-	
-	//Tests an array of 11 valid Querys to see if they return valid or invalid
+	//Tests an array of 13 valid Querys to see if they return valid or invalid
 	//I have no idea if there is such thing as an invalid query from what I have read online it seems every ASCII character is valid.
 	public void URLValQueryUnitTest()
 	{
@@ -336,14 +344,15 @@ public class UrlValidatorTest extends TestCase {
 		//Valid URL used to test Querys
 		String ValURL = "https://facebook.com";
 		//Array of Querys to be tested
-		String[] Querys = {"?action=view", "?action=edit&mode=up", "?act=hsdsdfhsd", "?====..a.dfsdsd``11~~~", "?~~``==IsThere", "?)(__+_SuchThing", "?@#$##AsAn", "?***&&&InvalidQuery??", "?::::12345::::IDont", "??????????know", ""};
+		String[] Querys = {"?action=view", "?action=edit&mode=up", "?act=hsdsdfhsd", "?====..a.dfsdsd``11~~~", "?~~``==Is", "?)(__+_Thing", "?@#$##AsAn", "?***&&&Query??", "?::::12345::::ABC", "??????????know", "?", "?<", "?>"};
+		String[] InvQuerys = {"action=view", "abc", "ABCDEF", "1123445", "<<<>>>>", "(~_~)" ," %$#%$", "AB@#tg23", "amazon", "**what", "Programmmmmm", "{}{}{}", "IB*()%%@!!+<><12"};
 		int i;
 		//Holds the final URL with the Query added to the end.
 		String URLQuery;
 		System.out.println("\n\n--------- UNIT TEST FOR QUERY IN URLVALIDATOR ---------\n");
-		System.out.println("--------- Test: Testing 10 Different Querys ---------\n");
+		System.out.println("--------- Test1: Testing 13 Different Valid Querys ---------\n");
 		//Test all 11 Querys
-		for(i=0; i <=10; i++)
+		for(i=0; i <=13; i++)
 		{
 			//Combine Valid URL with each Query.
 			URLQuery = ValURL + Querys[i];
@@ -351,6 +360,16 @@ public class UrlValidatorTest extends TestCase {
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
 			System.out.println("Expected:true, Actual: " + Is_Val);
+		}
+		System.out.println("\n--------- Test2: Testing 13 Different Invalid Querys ---------\n");
+		for(i=0; i <=12; i++)
+		{
+			//Combine Valid URL with each Invalid Query.
+			URLQuery = ValURL + InvQuerys[i];
+			Is_Val = urlVal.isValid(URLQuery);
+			System.out.println(URLQuery);
+			//Compare the expected result to the actual result from isValid()
+			System.out.println("Expected:false, Actual: " + Is_Val);
 		}
 	}
 
