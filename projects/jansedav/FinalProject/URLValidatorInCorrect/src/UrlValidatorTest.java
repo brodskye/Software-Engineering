@@ -14,14 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * Performs Validation Test for url validations.
+ * 
+ */
 
 import junit.framework.TestCase;
 
 /**
- * Performs Validation Test for url validations.
- *
- * @version $Revision: 1128446 $ $Date: 2011-05-27 13:29:27 -0700 (Fri, 27 May
- *          2011) $
+ * Final Project: Part B
+ * CS 362
+ * 12/4/2017
+ * Group Members:
+ * 	David Asuncion (asunciod)
+ * 	David Jansen (jansedav)
+ * 	Natasha Kvavle (kvavlen)
+ * 
  */
 public class UrlValidatorTest extends TestCase {
 
@@ -33,10 +41,16 @@ public class UrlValidatorTest extends TestCase {
 		super(testName);
 	}
 
+	/**
+	 * manual test function 
+	 */
 	public static void testManualTest() {
 		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-		// System.out.println(urlVal.isValid("http://www.amazon.com"));
-
+		
+		// Keep track of how many tests performed v. how many pass
+		int result = 0; 
+		int compare = 0; 
+		
 		System.out.println("------------------------- MANUALLY TESTING URLS -----------------------\n");
 
 		System.out.println("TEST 1: PROTOCOL");
@@ -44,61 +58,161 @@ public class UrlValidatorTest extends TestCase {
 		// manual test: protocol
 		System.out.println("URL: \"https://www.amazon.com\"");
 		System.out.println("Expected: true, Actual: " + urlVal.isValid("https://www.amazon.com"));
+		if (urlVal.isValid("https://www.amazon.com")) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"ftp://www.amazon.com\"");
 		System.out.println("Expected: true, Actual: " + urlVal.isValid("ftp://www.amazon.com"));
+		if (urlVal.isValid("ftp://www.amazon.com")) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \":www.amazon.com\"");
 		System.out.println("Expected: false, Actual: " + urlVal.isValid(":www.amazon.com"));
+		if (urlVal.isValid(":www.amazon.com") == false) {
+			result += 1;
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"100e://www.amazon.com\"");
 		System.out.println("Expected: false, Actual: " + urlVal.isValid("100e://www.amazon.com"));
+		if(urlVal.isValid("100e://www.amazon.com") == false) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"asdf://www.amazon.com\"");
 		System.out.println("Expected: true, Actual: " + urlVal.isValid("asdf://www.amazon.com"));
+		if(urlVal.isValid("asdf://www.amazon.com")) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"www.amazon.com\"");
 		System.out.println("Expected: false, Actual: " + urlVal.isValid("www.amazon.com"));
+		if (urlVal.isValid("www.amazon.com") == false) {
+			result += 1; 
+		}
+		compare += 1;
 
 		System.out.println("\nTEST 2: AUTHORITY");
 
 		// manual test: authority 
 		System.out.println("\nURL: \"http://www.google.com\"");
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.google.com/"));
+		if (urlVal.isValid("http://www.google.com/")) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"http://www.thisisaurl.com\""); 
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.thisisaurl.com/")); 
+		if (urlVal.isValid("http://www.thisisaurl.com/")) {
+			result += 1; 
+		}
+		compare += 1;
+	
 		System.out.println("\nURL: \"http://.amazon.com\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://.amazon.com"));
+		if (urlVal.isValid("http://.amazon.com") == false) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid(""));
+		if (urlVal.isValid("") == false) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"http://256.295.153.25\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://256.295.153.25"));
+		if (urlVal.isValid("http://256.295.153.25") == false) {
+			result += 1; 
+		}
+		compare += 1;
+		
 		System.out.println("\nURL: \"http://www..com\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www..com"));
-
+		if(urlVal.isValid("http://www..com") == false) {
+			result += 1;
+		}
+		compare += 1;
+		
 		System.out.println("\nTEST 3: PATH/QUERY"); 
  
 		// manual test: path/query  
 		System.out.println("\nURL:\"https://www.amazon.com/b?&node=17285120011&=value\"");
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/b?&node=17285120011&=value"));
+		if(urlVal.isValid("https://www.amazon.com/b?&node=17285120011&=value")) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"https://www.amazon.com/path\"");
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("https://www.amazon.com/path"));
+		if(urlVal.isValid("https://www.amazon.com/path")) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"https://www.google.com/\"\"\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("https://www.google.com/\"\""));
+		if(urlVal.isValid("https://www.google.com/\"\"") == false) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"http://www.amazon.com/<<>>\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.com/]"));
+		if (urlVal.isValid("http://www.amazon.com/]") == false) {
+			result += 1; 
+		}
+		compare += 1; 
 
 		System.out.println("\nTEST 4: PORT");
 
 		// manual test: port 
 		System.out.println("\nURL: \"http://www.amazon.com:8080\""); 
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.amazon.com:8080"));
+		if(urlVal.isValid("http://www.amazon.com:8080")) {
+			result += 1;
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"http://www.amazon.com:80\"");
 		System.out.println("Expected: True, Actual: " + urlVal.isValid("http://www.amazon.com:80"));
+		if(urlVal.isValid("http://www.amazon.com:80")) {
+			result += 1; 
+		}
+		compare += 1; 
+		
 		System.out.println("\nURL: \"http://www.amazon.com:k\"");
 		System.out.println("Expected: False, Actual: " + urlVal.isValid("http://www.amazon.com:k"));
+		if (urlVal.isValid("http://www.amazon.com:k") == false) {
+			result += 1; 
+		}
+		compare += 1; 
+		
+		// Compare actual v. expected result
+		assertTrue(compare == result); 
 	}
 
-	// main test function to test all input partitions
+	/**
+	 *  main test function to test all input partitions
+	 */
 	public static void testAllPartitions() {
 
 		System.out.println("\n------------------------- INPUT PARTITIONING TESTS -----------------------\n");
-
+		
+		// Keep track of actual v. expected number of passing tests
+		int result = 0; 
+		int compare = 0; 
+		
 		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
 		// input partition table scheme
@@ -111,7 +225,7 @@ public class UrlValidatorTest extends TestCase {
 
 		// loop through boolean 2D array
 		for (int i = 0; i < table_scheme.length; i++) {
-			
+					
 			//print out table scheme header
 			System.out.println("\n--------- INPUT PARTITION TEST SCHEME #" + i + ":\n Protocol Input: "
 				+ table_scheme[i][0] + ", Authority Input: " + table_scheme[i][1] + ", Port Input: "
@@ -130,16 +244,26 @@ public class UrlValidatorTest extends TestCase {
 				// print out URL and expected/actual results
 				System.out.println(test_url);
 				System.out.println("Expected: " + check_expected + ", Actual: " + urlVal.isValid(test_url) + "\n");
+				
+				if(check_expected == true) {
+					result += 1; 
+				}
+				compare += 1; 
 			}
-
 		}
+		
+		// Compare actual v. expected results
+		assertTrue(result == compare); 
 	}
 
-	// input:
-	// boolean: returns a string from either a valid string array or invalid string
-	// array
-	// integer: index value of array
-	// precondition: all partition array sizes must be the same length
+	/**
+ 	 * Allows retrieval of valid or invalid protocol of a URL
+ 	 *  input: 
+ 	 *  	boolean: returns a string from either a valid string array or invalid string
+ 	 * 	 	array
+ 	 *  	integer: index value of array
+ 	 *  	precondition: all partition array sizes must be the same length
+ 	 */ 
 	public static String testProtocolInput(boolean isValid, int index) {
 
 		// array for valid protocols
@@ -156,8 +280,15 @@ public class UrlValidatorTest extends TestCase {
 
 	}
 
-	// Partition function to test invalid and valid authority with the
-	// URLValidator() function provided by Apache Commons.
+	/**
+ 	 * Allows retrieval of valid or invalid authority of a URL
+ 	 * URLValidator() function provided by Apache Commons.
+ 	 * input: 
+ 	 *  	boolean: returns a string from either a valid string array or invalid string
+ 	 * 	 	array
+ 	 *  	integer: index value of array
+ 	 *  	precondition: all partition array sizes must be the same length
+ 	 */ 
 	public static String testAuthorityInput(boolean isValid, int index) {
 		// Valid authority String array of size 6
 		String[] valid = { "www.facebook.com", "amazon.com", "255.255.255.255", "facebook.cc", "facebook.au",
@@ -176,11 +307,19 @@ public class UrlValidatorTest extends TestCase {
 		}
 	}
 
+	/**
+ 	 * Allows retrieval of valid or invalid port of a URL
+ 	 *  input: 
+ 	 *  	boolean: returns a string from either a valid string array or invalid string
+ 	 * 	 	array
+ 	 *  	integer: index value of array
+ 	 *  	precondition: all partition array sizes must be the same length
+ 	 */ 
 	public static String testPortInput(boolean isValid, int index) {
 
 		// Arrays of valid and invalid ports
 		String[] valid = { ":8080", ":65535", ":1", ":0", ":80", ":345"};
-		String[] invalid = { ":notaport", ":10000000000", ":x", ":65536", "", ":#"};
+		String[] invalid = { ":notaport", ":10000000000", ":x", ":65536", ":", ":#"};
 
 		// Return valid or invalid port string at location within array specified,
 		// depending on arguments
@@ -192,10 +331,18 @@ public class UrlValidatorTest extends TestCase {
 		}
 	}
 
+	/**
+ 	 * Allows retrieval of valid or invalid path (and query) of a URL
+ 	 *  input: 
+ 	 *  	boolean: returns a string from either a valid string array or invalid string
+ 	 * 	 	array
+ 	 *  	integer: index value of array
+ 	 *  	precondition: all partition array sizes must be the same length
+ 	 */ 
 	public static String testPathInput(boolean isValid, int index) {
 		// Arrays for valid and invalid paths/queries
 		String[] valid = { "/", "/a", "/?", "/path?query", "/page8887", ""};
-		String[] invalid = { "/", "/<", "/>", "\"", "/ /", "/%"};
+		String[] invalid = { "/<", "/<<", "/>", "\"", "/ /", "/%"};
 
 		// Return valid or invalid path string at location within array specified,
 		// depending on arguments
@@ -206,35 +353,36 @@ public class UrlValidatorTest extends TestCase {
 		}
 	}
 
-	// public void testYourSecondPartition() {
-
-	//}
-
-	//public void testIsValid() {
-	//	for (int i = 0; i < 10000; i++) {
-
-	//	}
-	//}
-
+	/**
+	 * Runs unit tests
+	 * Asserts that all unit tests pass
+	 */ 
 	public void testAnyOtherUnitTest() {
-		inetAddressUnitTest();
-		URLValPortUnitTest();
-		URLValQueryUnitTest();
-		domainValidatorUnitTest(); 
+		// Compare result (number of "passes" in unit tests) to the number of tests run 
+		// Allows us to go through all tests without exiting program
+		int result = 0; 
+		int compare = 4; 
+		result += inetAddressUnitTest();
+		result += domainValidatorUnitTest(); 
+		result += URLValPortUnitTest();
+		result += URLValQueryUnitTest();
+
+		assertTrue(compare == result); 
 	}
 
 	/**
-	 * Create set of tests by taking the testUrlXXX arrays and running through all
-	 * possible permutations of their combinations.
+	 * Unit test for inetAddress segments
+	 * valid: all segments should return true between 0-255
+	 * invalid: all segments above 255 should return false
 	 *
-	 * @param testObjects
-	 *            Used to create a url.
-	 */
-	// Unit test for inetAddress segments
-	// valid: all segments should return true between 0-255
-	// invalid: all segments above 255 should return false
-	public void inetAddressUnitTest() {
+	 * Return 1 if all tests pass, 0 otherwise
+	 */ 
+	public int inetAddressUnitTest() {
 
+		// Keep track of how many tests pass v. expected number
+		int result = 0; 
+		int compare = 0; 
+		
 		// init new UrlValidator object
 		UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 
@@ -262,6 +410,10 @@ public class UrlValidatorTest extends TestCase {
 				isValidSegment = urlValidator.isValid(inetAddress);
 				System.out.println(inetAddress);
 				System.out.println("Expected: true, Actual: " + isValidSegment);
+				if (isValidSegment) {
+					result += 1; 
+				}
+				compare += 1; 
 			}
 
 		}
@@ -280,17 +432,38 @@ public class UrlValidatorTest extends TestCase {
 				isValidSegment = urlValidator.isValid(inetAddress);
 				System.out.println(inetAddress);
 				System.out.println("Expected: false, Actual: " + isValidSegment);
+				if (isValidSegment == false) {
+					result += 1; 
+				}
+				compare += 1; 
 			}
 
 		}
-
+		
+		
+		// Return 1 if all tests pass, 0 otherwise
+		if(compare == result) {
+			return 1; 
+		}
+		else {
+			return 0; 
+		}
 	}
 	
-	//Unit test for Port Values, uses the URLValidator and the isValid() function to test each port.
-	//Valid # Range: 1-65535
-	//Invalid # Range: > 65535
-	public void URLValPortUnitTest()
+	
+	/**
+	 * Unit test for Port Values, uses the URLValidator and the isValid() function to test each port.
+ 	 * Valid # Range: 1-65535
+ 	 * Invalid # Range: > 65535
+ 	 * 
+ 	 * Returns 1 if all tests pass, 0 otherwise
+ 	 */ 
+	public int URLValPortUnitTest()
 	{
+		// Keep track of how many tests pass v. expected number
+		int result = 0; 
+		int compare = 0; 
+		
 		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 		//int used to increment port value
 		int i;
@@ -310,6 +483,10 @@ public class UrlValidatorTest extends TestCase {
 			Is_Val = urlVal.isValid(URLProt);
 			System.out.println(URLProt);
 			System.out.println("Expected: true, Actual: " + Is_Val);
+			if (Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
 		}
 		
 		//Second loop runs for around 300 invalid port numbers to check and see if the UrlValidator is correctly checking invalid ports.
@@ -322,6 +499,10 @@ public class UrlValidatorTest extends TestCase {
 			Is_Val = urlVal.isValid(URLProt);
 			System.out.println(URLProt);
 			System.out.println("Expected: false, Actual: " + Is_Val);
+			if (!Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
 		}
 		//Third Loop runs for the range in which the error is ocurring so I can check where the error is happening
 		System.out.println("\n\n--------- Test 3: Checking the port range of 880-1024 where and error is occurring ---------");
@@ -332,12 +513,34 @@ public class UrlValidatorTest extends TestCase {
 			Is_Val = urlVal.isValid(URLProt);
 			System.out.println(URLProt);
 			System.out.println("Expected: false, Actual: " + Is_Val);
+			if (!Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
+		}
+		
+		// Return 1 if all pass, 0 otherwise
+		if(compare == result) {
+			return 1; 
+		}
+		else {
+			return 0; 
 		}
 	}
-	//Tests an array of 13 valid Querys to see if they return valid or invalid
-	//I have no idea if there is such thing as an invalid query from what I have read online it seems every ASCII character is valid.
-	public void URLValQueryUnitTest()
+	
+	
+	/**
+ 	 * Tests an array of 13 valid Querys to see if they return valid or invalid
+ 	 * I have no idea if there is such thing as an invalid query from what I have read online (see references in pdf) it seems every ASCII character is valid.
+ 	 * 
+ 	 * Returns 1 if all tests pass, 0 otherwise
+ 	 */ 
+	public int URLValQueryUnitTest()
 	{
+		// Keep track of number of passed tests v. expected number
+		int result = 0; 
+		int compare = 0; 
+		
 		//UrlValidator Object
 		UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 		Boolean Is_Val;
@@ -360,6 +563,10 @@ public class UrlValidatorTest extends TestCase {
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
 			System.out.println("Expected:true, Actual: " + Is_Val);
+			if (Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
 		}
 		System.out.println("\n--------- Test2: Testing 13 Different Invalid Querys ---------\n");
 		for(i=0; i <=12; i++)
@@ -370,6 +577,18 @@ public class UrlValidatorTest extends TestCase {
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
 			System.out.println("Expected:false, Actual: " + Is_Val);
+			if (!Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
+		}
+		
+		// Return 1 if all pass, 0 otherwise
+		if(compare == result) {
+			return 1; 
+		}
+		else {
+			return 0; 
 		}
 	}
 
@@ -377,8 +596,15 @@ public class UrlValidatorTest extends TestCase {
  	 * Creates arrays for valid and invalid: subdomains (i.e. www), domains (i.e. example), and tlds (i.e. com)
  	 * and tests combinations of all valid parts of a domain name, and all invalid parts of a domain name.  
  	 * 
+ 	 * Returns 1 if all tests pass, 0 otherwise
  	 */ 	
-	public void domainValidatorUnitTest() {
+	public int domainValidatorUnitTest() {
+		// Keep track of number of tests passed v. expected
+		int result = 0; 
+		int compare = 0; 
+		
+		System.out.println("\n\n--------- UNIT TEST FOR DOMAIN ---------\n");
+		
 		// Create valid sub-domains (i.e. the 'www' in www.example.com)
 		String[] valid_subdomain = { "www", "abc", "en", "123", "as23", "w-w", "a-", "thisisavalidsubdomain", "q", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasd" };
 		int valid_subdomain_ct = 10; 
@@ -388,8 +614,8 @@ public class UrlValidatorTest extends TestCase {
 		int invalid_subdomain_ct = 10; 
 				
 		// Create valid domain -- without TLD (i.e. example in example.com)
-		String[] valid_domain = { "google", "amazon", "thinkgeek", "asdfjkl", "123", "abc", "91a", "", "a", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasd" };
-		int valid_domain_ct = 10; 
+		String[] valid_domain = { "google", "amazon", "thinkgeek", "asdfjkl", "123", "abc", "91a", "a", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasd" };
+		int valid_domain_ct = 9; 
 				
 		// Create invalid domain -- without TLD
 		String[] invalid_domain = { "w-+", "#",	"?", "12&", ")", ">", "*", " ",	"", "asdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasdfjklmnoasde" };
@@ -416,30 +642,69 @@ public class UrlValidatorTest extends TestCase {
 		UrlValidator url_validator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 		
 		// TEST VALID URLS
+		System.out.println("--------- Test 1: Testing Valid Subdomain, Domain & TLD ---------\n");
 		for (int i = 0; i < valid_subdomain_ct; i++) {
 			for (int j = 0; j < valid_domain_ct; j++) {
 				for (int k = 0; k < valid_tlds_ct; k++) {
 					String test_url = "http://" + valid_subdomain[i] + "." + valid_domain[j] + "." + valid_tlds[k]; 
 					System.out.println(test_url);
 					System.out.println("Expected: true, Actual: " + url_validator.isValid(test_url)); 
+		
+					if (url_validator.isValid(test_url)) {
+						result += 1; 
+					}
+					compare += 1; 
 				}
 			}
 		}
 		
+		// TEST VALID LOCALHOST 
+		System.out.println("--------- Test 2: Testing Valid LocalHost ---------\n");
 		// Test localhost domain, which does not follow format above	
+		UrlValidator localhost_val = new UrlValidator(null, null, UrlValidator.ALLOW_LOCAL_URLS);
 		String local_url = "http://localhost"; 
 		System.out.println(local_url);
-		System.out.println("Expected: true, Actual: " + url_validator.isValid(local_url)); 
-	
+		System.out.println("Expected: true, Actual: " + localhost_val.isValid(local_url)); 	// expected false because have not turned on ALLOW_LOCAL_URLS
+		if(localhost_val.isValid(local_url) == true) {
+			result += 1;
+		}
+		compare += 1; 
+		
 		// TEST INVALID URLS
+		System.out.println("--------- Test 3: Testing Invalid Subdomain, Domain & TLD ---------\n");
 		for (int i = 0; i < invalid_subdomain_ct; i++) {
 			for (int j = 0; j < invalid_domain_ct; j++) {
 				for (int k = 0; k < invalid_tlds_ct; k++) {
 					String test_url = "http://" + invalid_subdomain[i] + "." + invalid_domain[j] + "." + invalid_tlds[k]; 
 					System.out.println(test_url);
 					System.out.println("Expected: false, Actual: " + url_validator.isValid(test_url)); 
+					if (!url_validator.isValid(test_url)) {
+						result += 1; 
+					}
+					compare += 1; 
 				}
 			}
 		}
+		
+		// TEST INVALID LOCALHOST 
+		System.out.println("--------- Test 4: Testing Invalid LocalHost ---------\n");
+		// Test invalid localhost domain, which does not follow format above	
+		UrlValidator bad_localhost_val = new UrlValidator(null, null, UrlValidator.ALLOW_LOCAL_URLS);
+		String bad_local_url = "http://locahost"; 
+		System.out.println(bad_local_url);
+		System.out.println("Expected: false, Actual: " + bad_localhost_val.isValid(bad_local_url)); 	// expected false because have not turned on ALLOW_LOCAL_URLS
+		if(bad_localhost_val.isValid(bad_local_url) == false) {
+			result += 1;
+		}
+		compare += 1; 
+		
+		// Return 1 if all tests pass, 0 otherwise
+		if(compare == result) {
+			return 1; 
+		}
+		else {
+			return 0; 
+		}
+
 	}
 }
