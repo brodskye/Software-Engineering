@@ -530,12 +530,12 @@ public class UrlValidatorTest extends TestCase {
 	
 	
 	/**
- 	 * Tests an array of 13 valid Querys to see if they return valid or invalid
+ 	 * Testing multiple arrays, combing valid Querys and paths, invalid paths and valid Querys and testing both individually.
  	 * I have no idea if there is such thing as an invalid query from what I have read online (see references in pdf) it seems every ASCII character is valid.
  	 * 
  	 * Returns 1 if all tests pass, 0 otherwise
  	 */ 
-	public int URLValQueryUnitTest()
+	public int URLValQueryPathUnitTest()
 	{
 		// Keep track of number of passed tests v. expected number
 		int result = 0; 
@@ -548,17 +548,18 @@ public class UrlValidatorTest extends TestCase {
 		String ValURL = "https://facebook.com";
 		//Array of Querys to be tested
 		String[] Querys = {"?action=view", "?action=edit&mode=up", "?act=hsdsdfhsd", "?====..a.dfsdsd``11~~~", "?~~``==Is", "?)(__+_Thing", "?@#$##AsAn", "?***&&&Query??", "?::::12345::::ABC", "??????????know", "?", "?<", "?>"};
-		String[] InvQuerys = {"action=view", "abc", "ABCDEF", "1123445", "<<<>>>>", "(~_~)" ," %$#%$", "AB@#tg23", "amazon", "**what", "Programmmmmm", "{}{}{}", "IB*()%%@!!+<><12"};
+		String[] InvPath = {"/../", "/..", "/..//tt", "/path//isbad", "/....././//", "/////False.." ," /&^..//", "//11233123", "//amazon..", "/bad..path", "//Programmmmmm", "{}{}{}", "//1234..123//..//.."};
+		String[] ValPath = {"/Valid", "/Path", "/Test", "/123/file", "/$hi", "/Path/file", "/t12/file", "/amazon", "/hello/file","/ten/tests", "/helloworld", "$12343", "/Lotsoftests", "/file/file/file/file"};
 		int i;
 		//Holds the final URL with the Query added to the end.
 		String URLQuery;
-		System.out.println("\n\n--------- UNIT TEST FOR QUERY IN URLVALIDATOR ---------\n");
-		System.out.println("--------- Test1: Testing 13 Different Valid Querys ---------\n");
+		System.out.println("\n\n--------- UNIT TEST FOR QUERY/PATH IN URLVALIDATOR ---------\n");
+		System.out.println("--------- Test1: Testing 13 Different Valid Paths with Querys ---------\n");
 		//Test all 11 Querys
-		for(i=0; i <=13; i++)
+		for(i=0; i <=12; i++)
 		{
 			//Combine Valid URL with each Query.
-			URLQuery = ValURL + Querys[i];
+			URLQuery = ValURL + ValPath[i] + Querys[i];
 			Is_Val = urlVal.isValid(URLQuery);
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
@@ -568,11 +569,41 @@ public class UrlValidatorTest extends TestCase {
 			}
 			compare += 1; 
 		}
-		System.out.println("\n--------- Test2: Testing 13 Different Invalid Querys ---------\n");
+		System.out.println("\n--------- Test2: Testing 13 Different Valid Paths no Query ---------\n");
 		for(i=0; i <=12; i++)
 		{
 			//Combine Valid URL with each Invalid Query.
-			URLQuery = ValURL + InvQuerys[i];
+			URLQuery = ValURL + ValPath[i];
+			Is_Val = urlVal.isValid(URLQuery);
+			System.out.println(URLQuery);
+			//Compare the expected result to the actual result from isValid()
+			System.out.println("Expected:true, Actual: " + Is_Val);
+			if (!Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
+		}
+		
+		System.out.println("\n--------- Test3: Testing 13 Different Valid Querys no Path ---------\n");
+		for(i=0; i <=12; i++)
+		{
+			//Combine Valid URL with each Invalid Query.
+			URLQuery = ValURL + Querys[i];
+			Is_Val = urlVal.isValid(URLQuery);
+			System.out.println(URLQuery);
+			//Compare the expected result to the actual result from isValid()
+			System.out.println("Expected:true, Actual: " + Is_Val);
+			if (!Is_Val) {
+				result += 1; 
+			}
+			compare += 1; 
+		}
+		
+		System.out.println("\n--------- Test4: Testing 13 Different Invalid Paths with Querys ---------\n");
+		for(i=0; i <=12; i++)
+		{
+			//Combine Valid URL with each Invalid Query.
+			URLQuery = ValURL + InvPath[i] + Querys[i];
 			Is_Val = urlVal.isValid(URLQuery);
 			System.out.println(URLQuery);
 			//Compare the expected result to the actual result from isValid()
@@ -583,12 +614,12 @@ public class UrlValidatorTest extends TestCase {
 			compare += 1; 
 		}
 		
-		// Return 1 if all pass, 0 otherwise
+	//	Return 1 if all pass, 0 otherwise
 		if(compare == result) {
 			return 1; 
 		}
 		else {
-			return 0; 
+		return 0; 
 		}
 	}
 
