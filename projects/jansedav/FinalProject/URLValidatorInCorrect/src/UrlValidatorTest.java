@@ -365,7 +365,7 @@ public class UrlValidatorTest extends TestCase {
 		result += inetAddressUnitTest();
 		result += domainValidatorUnitTest(); 
 		result += URLValPortUnitTest();
-		result += URLValQueryUnitTest();
+		result += URLValQueryPathUnitTest();
 
 		assertTrue(compare == result); 
 	}
