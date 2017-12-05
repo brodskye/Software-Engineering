@@ -512,7 +512,7 @@ public class UrlValidatorTest extends TestCase {
 			//Holds valid URL + port number
 			Is_Val = urlVal.isValid(URLProt);
 			System.out.println(URLProt);
-			System.out.println("Expected: false, Actual: " + Is_Val);
+			System.out.println("Expected: true, Actual: " + Is_Val);
 			if (!Is_Val) {
 				result += 1; 
 			}
